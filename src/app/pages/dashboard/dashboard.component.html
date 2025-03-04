@@ -1,0 +1,114 @@
+
+
+<!-- toolbar div - with more functionality within can be moved to separate component -->
+<div class="p-20px tw-flex tw-justify-between toolbar-div">
+    <div class="tw-flex action-div">
+        <div class="tw-justify-center mt-20px-mobile">
+            <p-iftalabel>
+                <p-select [formControl]="categorySortControl" [options]="sortOptions" inputId="sort"/>
+                <label for="sort">Category Sort</label>
+            </p-iftalabel>
+        </div>
+
+        <div class="tw-justify-center tw-content-center mt-20px-mobile">
+            <p-checkbox [formControl]="hideNeglectableControl" [binary]="true" inputId="neglect" />
+            <label for="neglect" class="ml-5px">Hide Neglectable</label>
+        </div>
+    </div>
+
+    <div class="tw-flex action-div">
+        <p-toast [life]="5000" />
+        <div class="tw-justify-center tw-content-center">
+            <p-fileupload 
+                mode="basic" 
+                chooseIcon="pi pi-upload" 
+                url="https://www.primefaces.org/cdn/api/upload.php" 
+                accept=".json" 
+                maxFileSize="5000000" 
+                (onUpload)="onFileUpload($event)" 
+                [auto]="true" 
+                chooseLabel="Upload File" 
+                [style]="{ width: '100%' }"
+            />
+        </div>
+    </div>
+</div>
+
+<p-divider />
+
+<div class="p-20px">
+    <div class="data-show-container">
+        <p-card [style]="{ width: '100%', overflow: 'hidden' }" class="tw-flex tw-justify-center diagram-card">
+            <p-stepper [value]="getNumericFlag('bar')" class="p-20px">
+                <p-step-list>
+                    <p-step [value]="getNumericFlag('bar')">Bar Chart</p-step>
+                    <p-step [value]="getNumericFlag('pie')">Pie Chart</p-step>
+                </p-step-list>
+                <p-step-panels>
+                    <p-step-panel [value]="getNumericFlag('bar')">
+                        <ng-template #content let-activateCallback="activateCallback">
+                            <div class="tw-flex tw-flex-col">
+                                <div class="tw-flex tw-flex-auto tw-justify-center tw-items-center">
+                                    <app-bar-chart></app-bar-chart>
+                                </div>
+                                <div class="tw-flex tw-justify-end pt-15px">
+                                    <p-button 
+                                        label="Pie Chart" 
+                                        icon="pi pi-arrow-right" 
+                                        iconPos="right" 
+                                        (onClick)="activateCallback(getNumericFlag('pie'))" 
+                                    />
+                                </div>
+                            </div>
+                        </ng-template>
+                    </p-step-panel>
+            
+                    <p-step-panel [value]="getNumericFlag('pie')">
+                        <ng-template #content let-activateCallback="activateCallback">
+                            <div class="tw-flex tw-flex-col">
+                                <div class="tw-flex tw-flex-auto tw-justify-center tw-items-center">
+                                    <app-pie-chart></app-pie-chart>
+                                </div>
+                                <div class="tw-flex tw-justify-start pt-15px">
+                                    <p-button 
+                                        label="Bar Chart" 
+                                        icon="pi pi-arrow-left" 
+                                        (onClick)="activateCallback(getNumericFlag('bar'))"
+                                    />
+                                </div>
+                            </div>
+                        </ng-template>
+                    </p-step-panel>
+                </p-step-panels>
+            </p-stepper>
+        </p-card>
+
+        <p-card>
+            <p-table
+                [value]="dataFiles"
+                [paginator]="true"
+                [rows]="5"
+                [rowsPerPageOptions]="[5, 10, 20]"
+                selectionMode="single" 
+                [selection]="selectedFile"
+                (onRowSelect)="selectFile($event)"
+                [metaKeySelection]="true" 
+            >
+                <ng-template #header>
+                    <tr>
+                        <th style="width:30%">Id</th>
+                        <th style="width:40%">Name</th>
+                        <th style="width:30%">Upload Date</th>
+                    </tr>
+                </ng-template>
+                <ng-template #body let-file let-rowIndex="rowIndex">
+                    <tr [pSelectableRow]="file" [pSelectableRowIndex]="rowIndex">
+                        <td>{{ file.id }}</td>
+                        <td>{{ file.name }}</td>
+                        <td>{{ file.uploadDate | date: 'dd/MM/yyyy' }}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </p-card>
+    </div>
+</div>

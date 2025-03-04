@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'DiagramDrafter' title`, () => {
+  it(`should have the 'Diagram Drafter' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('DiagramDrafter');
+    expect(app.title).toEqual('Diagram Drafter');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, DiagramDrafter');
+    expect(compiled.querySelector('h2')?.textContent).toContain('Diagram Drafter');
   });
 });

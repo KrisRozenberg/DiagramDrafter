@@ -1,0 +1,41 @@
+@navigationColor: var(--p-surface-200);
+@primary: var(--p-primary-600);
+
+:host {
+    display: flex;
+    flex: 1 1 auto;
+    width: 100%;
+    height: 100%;
+}
+
+.header {
+    position: relative;
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    height: 50px;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    background-color: @navigationColor;
+}
+
+.footer {
+    position: relative;
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 100%;
+    border-top: 1px solid gray;
+    background-color: @navigationColor;
+
+    span {
+        font-weight: 500;
+        font-size: smaller;
+    }
+}
+
+h2 {
+    color: @primary;
+    margin-left: 20px;
+}

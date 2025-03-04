@@ -1,1 +1,58 @@
-/* You can add global styles to this file, and also import other style files */
+@import "primeicons/primeicons.css";
+
+html, body { 
+    height: 100%; 
+}
+
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+    background-color: var(--p-surface-100)
+}
+
+// next block copies tailwind classes; tailwind library wasn't used because initial task required styles to be handled using less
+.tw {
+    &-flex {
+        display: flex;
+    }
+    
+    &-flex-col {
+        flex-direction: column;
+    }
+    
+    &-flex-auto {
+        flex: 1 1 auto;
+    }
+    
+    &-justify-center {
+        justify-content: center;
+    }
+
+    &-justify-between {
+        justify-content: space-between;
+    }
+
+    &-justify-start {
+        justify-content: start;
+    }
+
+    &-justify-end {
+        justify-content: end;
+    }
+    
+    &-items-center {
+        align-items: center;
+    }
+
+    &-content-center {
+        align-content: center;
+    }
+
+    &-h-full {
+        height: 100%;
+    }
+
+    &-w-full {
+        width: 100%;
+    }
+}
